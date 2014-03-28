@@ -1,19 +1,26 @@
-#
-One take on the angular bootstrap project
+# [magpie-angular-starter](http://github.com/cbricker-msw/magpie-angular-starter)
+
+A magpie-specific opinionated kickstarter for AngularJS projects
+
+***
 
 ## Quick Start
 
-
-## Running server
-Install Node.js
-
-Install npm - node's package manager
-
-Install express using npm
-
-Run the server.js file using node
+Install Node.js and then:
 
 ```sh
- $ node server.sh
-cd ```
+$ git clone git://github.com/cbricker-msw/magpie-angular-starter
+$ cd magpie-angular-starter
+$ npm -g install grunt-cli karma bower
+$ npm install
+$ bower install
+$ npm install express
+```
+Run the server:
+```sh
+$ node server/server
+```
+
+To run the website, open `file:///path/to/magpie-angular-starter/app/index.html
+Use magpie/magpie for username and password
 
