@@ -12,8 +12,8 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.get('/user', auth, function (req, res) {
-    console.log("received get /user request");
+app.get('/login', auth, function (req, res) {
+    console.log("received get /login request");
     res.send({ userId: 15, name: "Magpie User" });
 });
 

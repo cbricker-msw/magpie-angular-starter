@@ -1,45 +1,20 @@
-'use strict'
+'use strict';
 
 var services = angular.module('msa.services', []);
 
-services.factory('userService', [ '$http', '$q', function ($http, $q) {
-    var currentUser = {};
+services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', function ($q, $rootScope, $window, $http) {
+    var service = {
+        currentUser: null,
 
-    return {
-        get: function () {
+        login: function (credentials) {
             var deferred = $q.defer();
-            $http.get('http://localhost:3001/user')
-                .success(function (data) {
-                    currentUser = data;
-                    deferred.resolve();
-                })
-                .error(function (data) {
-                    deferred.reject(data);
-                });
-            return deferred.promise;
-        },
-
-        currentUser: function () {
-            return currentUser;
-        },
-
-        clearCurrentUser: function () {
-            currentUser = {};
-        }
-    };
-}]);
-
-services.factory('authenticationService', [ '$q', '$rootScope', '$window', 'userService', function ($q, $rootScope, $window, userService) {
-    return {
-        login: function (username, password) {
-            var deferred = $q.defer();
-            var words = CryptoJS.enc.Utf8.parse(username + ":" + password);
+            var words = CryptoJS.enc.Utf8.parse(credentials.username + ":" + credentials.password);
             $window.sessionStorage.token = CryptoJS.enc.Base64.stringify(words);
 
-            userService.get().then(
-                function () {
-                    $rootScope.$broadcast('loggedIn');
-                    deferred.resolve();
+            $http.get('http://localhost:3001/login').then(
+                function (result) {
+                    service.currentUser = result.data;
+                    deferred.resolve(service.currentUser);
                 },
                 function (errors) {
                     delete $window.sessionStorage.token;
@@ -51,7 +26,16 @@ services.factory('authenticationService', [ '$q', '$rootScope', '$window', 'user
 
         logout: function () {
             delete $window.sessionStorage.token;
-            userService.clearCurrentUser();
+            service.currentUser = null;
+        },
+
+        isAuthenticated: function () {
+            return !!$window.sessionStorage.token;
+        },
+
+        getCurrentUser: function () {
+            return service.currentUser;
         }
     };
+    return service;
 }]);

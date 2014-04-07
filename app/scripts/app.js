@@ -9,18 +9,21 @@ var app = angular.module('magpieStarterApp', [
     'msa.controllers'
 ]);
 
-app.config([ '$routeProvider', function ($routeProvider) {
+app.config([ '$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    //$locationProvider.html5Mode(true);
     $routeProvider
-        .when('/home', {
+        .when('/', {
             templateUrl: 'views/home.html',
-            controller: 'HomeController'
+            controller: 'HomeController',
+            controllerAs: 'home'
         })
         .when('/login', {
             templateUrl: 'views/auth.html',
-            controller: 'AuthController'
+            controller: 'LoginController',
+            controllerAs: 'login'
         })
         .otherwise({
-            redirectTo: '/login'
+            redirectTo: '/'
         });
 }]);
 

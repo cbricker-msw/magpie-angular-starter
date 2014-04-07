@@ -2,41 +2,44 @@
 
 var controllers = angular.module('msa.controllers', [ 'msa.services' ]);
 
-controllers.controller('HomeController', ['$scope', 'userService', function ($scope, userService) {
-    $scope.user = {
-        data: userService.currentUser()
-    };
+controllers.controller('HomeController', [ '$location', 'securityService', function ($location, securityService) {
+    this.data = securityService.getCurrentUser();
+    if (!this.data) {
+        $location.path("/login");
+    }
 }]);
 
-controllers.controller('AuthController', ['$scope', '$location', 'authenticationService', function ($scope, $location, authenticationService) {
-    $scope.auth = {};
+controllers.controller('LoginController', [ '$location', 'securityService', function ($location, securityService) {
+    this.credentials = {
+        username: '',
+        password: ''
+    };
+    this.error = "";
+    this.isAuthenticated = securityService.isAuthenticated;
 
-    $scope.login = function () {
-        authenticationService.login($scope.auth.username, $scope.auth.password).then(
+    this.login = function (credentials) {
+        var _this = this;
+        securityService.login(credentials).then(
             function () {
-                $location.url('/home');
+                $location.path("/");
             },
             function (errors) {
                 if (errors) {
-                    $scope.error = "Unable to login: " + errors;
+                    _this.error = "Unable to login: " + errors;
                 } else {
-                    $scope.error = "Cannot connect to server";
+                    _this.error = "Cannot connect to server";
                 }
              }
         );
     };
-}]);
 
-controllers.controller('NavigationController', ['$scope', '$location', 'authenticationService', function ($scope, $location, authenticationService) {
-    $scope.authenticated = false;
-
-    $scope.logout = function () {
-        authenticationService.logout();
-        $scope.authenticated = false;
-        $location.url('/login');
+    this.logout = function () {
+        securityService.logout();
+        $location.url('/');
     };
 
-    $scope.$on('loggedIn', function () {
-        $scope.authenticated = true;
-    });
+}]);
+
+controllers.controller('HeaderController', [ 'securityService', function (securityService) {
+    this.isAuthenticated = securityService.isAuthenticated;
 }]);

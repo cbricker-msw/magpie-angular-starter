@@ -1,41 +1,42 @@
-'use strict'
+'use strict';
 
-describe('Given authenticationService', function () {
-    var mockUserService, q, rootScope, window, service, deferred, result, error;
+describe('Given securityService', function () {
+    var httpBackend, q, rootScope, window, service, deferred, result, error, resultReturned;
 
     beforeEach(function () {
         result = undefined;
         error = undefined;
         deferred = undefined;
+        resultReturned = { userId: 15, name: "Magpie User" };
+
         module('msa.services');
 
-        mockUserService = jasmine.createSpyObj('userService', [ 'get', 'clearCurrentUser' ]);
-
-        module(function ($provide) {
-            $provide.value('userService', mockUserService);
-        });
-
-        inject(function ($rootScope, $q, $window, authenticationService) {
+        inject(function ($httpBackend, $rootScope, $q, $window, securityService) {
+            httpBackend = $httpBackend;
             rootScope = $rootScope;
             q = $q;
             window = $window;
-            service = authenticationService;
+            service = securityService;
         });
+    });
 
-        spyOn(rootScope, '$broadcast').andCallThrough();
-
+    afterEach(function () {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
     });
 
     describe('login', function () {
         it('should handle a successful login', function () {
             var username = "test-username";
             var password = "test-password";
+            var credentials = { username: username, password: password };
             var token = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(username + ":" + password));
 
             deferred = q.defer();
-            mockUserService.get.andReturn(deferred.promise);
+            httpBackend.expectGET('http://localhost:3001/login').respond(
+                200, resultReturned);
 
-            service.login(username, password).then(
+            service.login(credentials).then(
                 function (testResult) {
                     result = testResult;
                 },
@@ -43,13 +44,12 @@ describe('Given authenticationService', function () {
                     error = testError;
                 }
             );
+            httpBackend.flush();
             deferred.resolve();
             rootScope.$apply();
 
             expect(error).toBeUndefined();
             expect(window.sessionStorage.token).toBe(token);
-            expect(rootScope.$broadcast).toHaveBeenCalledWith('loggedIn');
-            expect(mockUserService.get).toHaveBeenCalled();
         });
 
         it('should handle a failed login', function () {
@@ -58,7 +58,7 @@ describe('Given authenticationService', function () {
             var errorResult = { status: 401, data: "Not Authorized" };
 
             deferred = q.defer();
-            mockUserService.get.andReturn(deferred.promise);
+            httpBackend.expectGET('http://localhost:3001/login').respond(401, 'Not Authorized');
 
             service.login(username, password).then(
                 function (testResult) {
@@ -68,14 +68,13 @@ describe('Given authenticationService', function () {
                     error = testError;
                 }
             );
+            httpBackend.flush();
             deferred.reject(errorResult);
             rootScope.$apply();
 
             expect(result).toBeUndefined();
-            expect(error).toBe(errorResult);
+            expect(error.status).toBe(errorResult.status);
             expect(window.sessionStorage.token).toBeUndefined();
-            expect(rootScope.$broadcast).not.toHaveBeenCalledWith('loggedIn');
-            expect(mockUserService.get).toHaveBeenCalled();
         });
     });
 
@@ -84,7 +83,6 @@ describe('Given authenticationService', function () {
             service.logout();
 
             expect(window.sessionStorage.token).toBeUndefined();
-            expect(mockUserService.clearCurrentUser).toHaveBeenCalled();
         });
     });
 
