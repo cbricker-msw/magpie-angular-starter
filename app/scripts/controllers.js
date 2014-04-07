@@ -5,7 +5,7 @@ var controllers = angular.module('msa.controllers', [ 'msa.services' ]);
 controllers.controller('HomeController', [ '$location', 'securityService', function ($location, securityService) {
     this.data = securityService.getCurrentUser();
     if (!this.data) {
-        $location.path("/login");
+        $location.path('/login');
     }
 }]);
 
@@ -14,22 +14,22 @@ controllers.controller('LoginController', [ '$location', 'securityService', func
         username: '',
         password: ''
     };
-    this.error = "";
+    this.error = '';
     this.isAuthenticated = securityService.isAuthenticated;
 
     this.login = function (credentials) {
-        var _this = this;
+        var login = this;
         securityService.login(credentials).then(
             function () {
-                $location.path("/");
+                $location.path('/');
             },
             function (errors) {
                 if (errors) {
-                    _this.error = "Unable to login: " + errors;
+                    login.error = 'Unable to login: ' + errors;
                 } else {
-                    _this.error = "Cannot connect to server";
+                    login.error = 'Cannot connect to server';
                 }
-             }
+            }
         );
     };
 
@@ -40,6 +40,10 @@ controllers.controller('LoginController', [ '$location', 'securityService', func
 
 }]);
 
-controllers.controller('HeaderController', [ 'securityService', function (securityService) {
+controllers.controller('HeaderController', [ '$location', 'securityService', function ($location, securityService) {
     this.isAuthenticated = securityService.isAuthenticated;
+
+    this.isActive = function(viewLocation) {
+        return viewLocation === $location.path();
+    };
 }]);

@@ -1,6 +1,6 @@
 'use strict';
 
-describe("Given LoginController", function () {
+describe('Given LoginController', function () {
     var scope, rootScope, controller, q, location, mockSecurityService;
 
     beforeEach(function () {
@@ -20,12 +20,12 @@ describe("Given LoginController", function () {
         });
     });
 
-    it("login routes to /home on success", function () {
-        var username = "test-username";
-        var password = "test-password";
+    it('login routes to /home on success', function () {
+        var username = 'test-username';
+        var password = 'test-password';
         var credentials = { username: username, password: password };
 
-        location.path("/");
+        location.path('/');
 
         var deferred = q.defer();
         mockSecurityService.login.andReturn(deferred.promise);
@@ -39,12 +39,12 @@ describe("Given LoginController", function () {
         expect(controller.error).toBe('');
     });
 
-    it("login fails", function () {
-        var username = "test-username";
-        var password = "test-password";
+    it('login fails', function () {
+        var username = 'test-username';
+        var password = 'test-password';
         var credentials = { username: username, password: password };
 
-        location.path("/");
+        location.path('/');
 
         var deferred = q.defer();
         mockSecurityService.login.andReturn(deferred.promise);
@@ -58,7 +58,7 @@ describe("Given LoginController", function () {
         expect(scope.error).not.toBe('');
     });
 
-    it("logout succeeds", function () {
+    it('logout succeeds', function () {
         controller.logout();
 
         expect(location.path()).toEqual('/');

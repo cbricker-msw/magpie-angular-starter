@@ -9,8 +9,7 @@ var app = angular.module('magpieStarterApp', [
     'msa.controllers'
 ]);
 
-app.config([ '$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    //$locationProvider.html5Mode(true);
+app.config([ '$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',

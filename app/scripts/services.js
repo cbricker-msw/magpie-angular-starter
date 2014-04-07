@@ -2,14 +2,13 @@
 
 var services = angular.module('msa.services', []);
 
-services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', function ($q, $rootScope, $window, $http) {
+services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', function ($q, $rootScope, $window, $http, cryptographyService) {
     var service = {
         currentUser: null,
 
         login: function (credentials) {
             var deferred = $q.defer();
-            var words = CryptoJS.enc.Utf8.parse(credentials.username + ":" + credentials.password);
-            $window.sessionStorage.token = CryptoJS.enc.Base64.stringify(words);
+            $window.sessionStorage.token = cryptographyService.base64Encode(credentials.username + ':' + credentials.password);
 
             $http.get('http://localhost:3001/login').then(
                 function (result) {
@@ -39,3 +38,11 @@ services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', fu
     };
     return service;
 }]);
+
+services.factory('cryptographyService', function () {
+    return {
+        base64Encode: function (stringToEncode) {
+            return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(stringToEncode));
+        }
+    };
+});
