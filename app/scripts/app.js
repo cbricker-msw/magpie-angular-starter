@@ -17,7 +17,7 @@ app.config([ '$routeProvider', function ($routeProvider) {
             controllerAs: 'home'
         })
         .when('/login', {
-            templateUrl: 'views/auth.html',
+            templateUrl: 'views/login.html',
             controller: 'LoginController',
             controllerAs: 'login'
         })
@@ -26,7 +26,7 @@ app.config([ '$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.factory('authInterceptor', function ($rootScope, $q, $window, $location) {
+app.factory('authInterceptor', function ($q, $window, $location) {
     return {
         request: function (config) {
             config.headers = config.headers || {};

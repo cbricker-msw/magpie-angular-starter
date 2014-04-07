@@ -25,7 +25,7 @@ controllers.controller('LoginController', [ '$location', 'securityService', func
             },
             function (errors) {
                 if (errors) {
-                    login.error = 'Unable to login: ' + errors;
+                    login.error = 'Unable to login: ' + errors.status + ' - ' + errors.data;
                 } else {
                     login.error = 'Cannot connect to server';
                 }
