@@ -9,7 +9,7 @@ controllers.controller('HomeController', [ '$location', 'securityService', funct
     }
 }]);
 
-controllers.controller('LoginController', [ '$location', 'securityService', function ($location, securityService) {
+controllers.controller('LoginController', [ '$location', '$translate', 'securityService', function ($location, $translate, securityService) {
     this.credentials = {
         username: '',
         password: ''
@@ -24,11 +24,9 @@ controllers.controller('LoginController', [ '$location', 'securityService', func
                 $location.path('/');
             },
             function (errors) {
-                if (errors) {
-                    login.error = 'Unable to login: ' + errors.status + ' - ' + errors.data;
-                } else {
-                    login.error = 'Cannot connect to server';
-                }
+                $translate('LOGIN_ERROR', { status: errors.status, data: errors.data }).then(function (message) {
+                    login.error = message;
+                });
             }
         );
     };

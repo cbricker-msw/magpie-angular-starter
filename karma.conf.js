@@ -19,6 +19,8 @@ module.exports = function (config) {
             'app/bower_components/angular-route/angular-route.js',
             'app/bower_components/crypto-js/components/core-min.js',
             'app/bower_components/crypto-js/components/enc-base64.js',
+            'app/bower_components/angular-translate/angular-translate.js',
+            'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/mock/**/*.js',

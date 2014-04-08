@@ -46,8 +46,8 @@
             <div class="navbar-header pull-right" ng-show="header.isAuthenticated()" ng-controller="LoginController as login">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{ active: header.isActive('/') }"><a href="#!/">Home</a></li>
-                        <li><a href="#" ng-click="login.logout()">Sign out</a></li>
+                        <li ng-class="{ active: header.isActive('/') }"><a href="#!/">{{ 'HOME_NAVIGATION' | translate }}</a></li>
+                        <li><a href="#" ng-click="login.logout()">{{ 'SIGN_OUT' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,6 +89,8 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/crypto-js/components/core-min.js"></script>
     <script src="bower_components/crypto-js/components/enc-base64.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

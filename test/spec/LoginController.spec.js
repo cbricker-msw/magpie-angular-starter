@@ -1,23 +1,26 @@
 'use strict';
 
 describe('Given LoginController', function () {
-    var scope, rootScope, controller, q, location, mockSecurityService;
+    var scope, rootScope, controller, q, location, translate, mockSecurityService;
 
     beforeEach(function () {
         module('msa.controllers');
+        module('pascalprecht.translate');
 
         mockSecurityService = jasmine.createSpyObj('securityService', [ 'login', 'logout' ]);
 
-        inject(function ($rootScope, $controller, $q, $location) {
+        inject(function ($rootScope, $controller, $q, $location, $translate) {
             scope = $rootScope.$new();
             q = $q;
             rootScope = $rootScope;
             location = $location;
+            translate = $translate;
 
             controller = $controller('LoginController', {
                 securityService: mockSecurityService
             });
         });
+
     });
 
     it('login routes to /home on success', function () {
@@ -50,7 +53,7 @@ describe('Given LoginController', function () {
         mockSecurityService.login.andReturn(deferred.promise);
 
         controller.login(credentials);
-        deferred.reject();
+        deferred.reject({ status: 404 });
         rootScope.$apply();
 
         expect(location.path()).toEqual('/');

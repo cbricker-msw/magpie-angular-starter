@@ -25,6 +25,7 @@ describe('Given securityService', function () {
             window = $window;
             service = securityService;
         });
+
     });
 
     afterEach(function () {

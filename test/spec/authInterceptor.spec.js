@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Given authInterceptor', function () {
-    var q, rootScope, window, location, interceptor, deferred, result, error, resultReturned;
+    var httpBackend, q, rootScope, window, location, interceptor, deferred, result, error, resultReturned;
 
     beforeEach(function () {
         result = undefined;
@@ -11,13 +11,16 @@ describe('Given authInterceptor', function () {
 
         module('magpieStarterApp');
 
-        inject(function ($location, $rootScope, $q, $window, authInterceptor) {
+        inject(function ($httpBackend, $location, $rootScope, $q, $window, authInterceptor) {
+            httpBackend = $httpBackend;
             location = $location;
             rootScope = $rootScope;
             q = $q;
             window = $window;
             interceptor = authInterceptor;
         });
+
+        httpBackend.whenGET('i18n/locale-en.json').respond(200, {});
     });
 
     describe('request', function () {

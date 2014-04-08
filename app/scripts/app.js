@@ -6,10 +6,11 @@ var app = angular.module('magpieStarterApp', [
     'ngSanitize',
     'ngRoute',
     'msa.services',
-    'msa.controllers'
+    'msa.controllers',
+    'pascalprecht.translate'
 ]);
 
-app.config([ '$routeProvider', function ($routeProvider) {
+app.config([ '$routeProvider', '$translateProvider', function ($routeProvider, $translateProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
@@ -24,6 +25,12 @@ app.config([ '$routeProvider', function ($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'i18n/locale-',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('en');
 }]);
 
 app.factory('authInterceptor', function ($q, $window, $location) {
