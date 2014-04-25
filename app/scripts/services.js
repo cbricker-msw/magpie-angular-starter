@@ -1,8 +1,8 @@
 'use strict';
 
-var services = angular.module('msa.services', []);
+var services = angular.module('msa.services', [ 'msa.models' ]);
 
-services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', function ($q, $rootScope, $window, $http, cryptographyService) {
+services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', 'User', function ($q, $rootScope, $window, $http, cryptographyService, User) {
     var service = {
         currentUser: null,
 
@@ -12,7 +12,7 @@ services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'c
 
             $http.get('http://localhost:3001/login').then(
                 function (result) {
-                    service.currentUser = result.data;
+                    service.currentUser = User.build(result.data);
                     deferred.resolve(service.currentUser);
                 },
                 function (errors) {

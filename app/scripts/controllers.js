@@ -3,8 +3,8 @@
 var controllers = angular.module('msa.controllers', [ 'msa.services' ]);
 
 controllers.controller('HomeController', [ '$location', 'securityService', function ($location, securityService) {
-    this.data = securityService.getCurrentUser();
-    if (!this.data) {
+    this.user = securityService.getCurrentUser();
+    if (!this.user) {
         $location.path('/login');
     }
 }]);

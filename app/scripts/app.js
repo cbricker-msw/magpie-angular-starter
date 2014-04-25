@@ -7,6 +7,7 @@ var app = angular.module('magpieStarterApp', [
     'ngRoute',
     'msa.services',
     'msa.controllers',
+    'msa.models',
     'pascalprecht.translate'
 ]);
 

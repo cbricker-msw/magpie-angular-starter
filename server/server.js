@@ -14,7 +14,7 @@ app.all('*', function (req, res, next) {
 
 app.get('/login', auth, function (req, res) {
     console.log("received get /login request");
-    res.send({ userId: 15, name: "Magpie User" });
+    res.send({ userId: 15, firstName: "Magpie", lastName: "User" });
 });
 
 var portNumber = 3001;
