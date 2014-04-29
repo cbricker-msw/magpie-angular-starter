@@ -4,7 +4,8 @@ describe('Given LoginController', function () {
     var scope, rootScope, controller, q, location, translate, mockSecurityService;
 
     beforeEach(function () {
-        module('msa.controllers');
+        module('msa.login');
+        module('ngRoute');
         module('pascalprecht.translate');
 
         mockSecurityService = jasmine.createSpyObj('securityService', [ 'login', 'logout' ]);

@@ -10,7 +10,8 @@ describe('Given securityService', function () {
         deferred = undefined;
         resultReturned = { userId: 15, name: 'Magpie User' };
 
-        module('msa.services');
+        module('msa.common.security');
+        module('msa.common.models');
 
         mockCryptographyService = jasmine.createSpyObj('cryptographyService', [ 'base64Encode' ]);
 

@@ -5,30 +5,21 @@ var app = angular.module('magpieStarterApp', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'msa.services',
-    'msa.controllers',
-    'msa.models',
+    'msa.home',
+    'msa.login',
+    'msa.common.security',
+    'msa.common.models',
     'pascalprecht.translate'
 ]);
 
 app.config([ '$routeProvider', '$translateProvider', function ($routeProvider, $translateProvider) {
     $routeProvider
-        .when('/', {
-            templateUrl: 'views/home.html',
-            controller: 'HomeController',
-            controllerAs: 'home'
-        })
-        .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginController',
-            controllerAs: 'login'
-        })
         .otherwise({
             redirectTo: '/'
         });
 
     $translateProvider.useStaticFilesLoader({
-        prefix: 'i18n/locale-',
+        prefix: 'assets/i18n/locale-',
         suffix: '.json'
     });
     $translateProvider.preferredLanguage('en');
@@ -60,3 +51,11 @@ app.config(function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
+
+app.controller('HeaderController', [ '$location', 'securityService', function ($location, securityService) {
+    this.isAuthenticated = securityService.isAuthenticated;
+
+    this.isActive = function(viewLocation) {
+        return viewLocation === $location.path();
+    };
+}]);

@@ -20,7 +20,7 @@ describe('Given authInterceptor', function () {
             interceptor = authInterceptor;
         });
 
-        httpBackend.whenGET('i18n/locale-en.json').respond(200, {});
+        httpBackend.whenGET('assets/i18n/locale-en.json').respond(200, {});
     });
 
     describe('request', function () {

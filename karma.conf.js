@@ -21,10 +21,13 @@ module.exports = function (config) {
             'app/bower_components/crypto-js/components/enc-base64.js',
             'app/bower_components/angular-translate/angular-translate.js',
             'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-            'app/scripts/*.js',
-            'app/scripts/**/*.js',
-            'test/mock/**/*.js',
-            'test/spec/**/*.js'
+            'app/*.js',
+            // security.js is specifically called out because it contains the module definition but is not the
+            // first file alphabetically in this directory.
+            'app/common/security/security.js',
+            'app/common/**/*.js',
+            'app/home/**/*.js',
+            'app/login/**/*.js'
         ],
 
         // list of files / patterns to exclude

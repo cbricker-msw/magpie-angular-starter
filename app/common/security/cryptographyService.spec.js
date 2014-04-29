@@ -4,7 +4,7 @@ describe('Given cryptographyService', function () {
     var service;
 
     beforeEach(function () {
-        module('msa.services');
+        module('msa.common.security');
 
         inject(function (cryptographyService) {
             service = cryptographyService;

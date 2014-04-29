@@ -1,8 +1,8 @@
 'use strict';
 
-var services = angular.module('msa.services', [ 'msa.models' ]);
+angular.module('msa.common.security')
 
-services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', 'User', function ($q, $rootScope, $window, $http, cryptographyService, User) {
+.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', 'User', function ($q, $rootScope, $window, $http, cryptographyService, User) {
     var service = {
         currentUser: null,
 
@@ -38,11 +38,3 @@ services.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'c
     };
     return service;
 }]);
-
-services.factory('cryptographyService', function () {
-    return {
-        base64Encode: function (stringToEncode) {
-            return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(stringToEncode));
-        }
-    };
-});

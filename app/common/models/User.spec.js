@@ -4,7 +4,7 @@ describe('Given securityService', function () {
     var factory;
 
     beforeEach(function () {
-        module('msa.models');
+        module('msa.common.models');
 
         inject(function (User) {
             factory = User;

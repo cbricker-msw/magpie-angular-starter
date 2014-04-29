@@ -1,8 +1,8 @@
 'use strict';
 
-var models = angular.module('msa.models', []);
+angular.module('msa.common.models')
 
-models.factory('User', function () {
+.factory('User', function () {
 
     function User(userId, firstName, lastName) {
         this.userId = userId;

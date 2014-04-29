@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img class="img-responsive nav-logo" src="images/magpie-software-logo.png">
+                    <img class="img-responsive nav-logo" src="assets/images/magpie-software-logo.png">
                 </a>
             </div>
             <div class="navbar-header pull-right" ng-show="header.isAuthenticated()" ng-controller="LoginController as login">
@@ -97,10 +97,16 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers.js"></script>
-    <script src="scripts/services.js"></script>
-    <script src="scripts/models.js"></script>
+    <script src="app.js"></script>
+    <script src="home/home.js"></script>
+    <script src="home/homeController.js"></script>
+    <script src="login/login.js"></script>
+    <script src="login/loginController.js"></script>
+    <script src="common/security/security.js"></script>
+    <script src="common/security/securityService.js"></script>
+    <script src="common/security/cryptographyService.js"></script>
+    <script src="common/models/models.js"></script>
+    <script src="common/models/user.js"></script>
     <!-- endbuild -->
 </body>
 </html>
