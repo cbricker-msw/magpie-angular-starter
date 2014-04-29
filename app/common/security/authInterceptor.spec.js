@@ -9,7 +9,7 @@ describe('Given authInterceptor', function () {
         deferred = undefined;
         resultReturned = { userId: 15, name: 'Magpie User' };
 
-        module('magpieStarterApp');
+        module('msa.common.security');
 
         inject(function ($httpBackend, $location, $rootScope, $q, $window, authInterceptor) {
             httpBackend = $httpBackend;

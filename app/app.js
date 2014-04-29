@@ -25,26 +25,6 @@ app.config([ '$routeProvider', '$translateProvider', function ($routeProvider, $
     $translateProvider.preferredLanguage('en');
 }]);
 
-app.factory('authInterceptor', function ($q, $window, $location) {
-    return {
-        request: function (config) {
-            config.headers = config.headers || {};
-            if ($window.sessionStorage.token) {
-                config.headers.Authorization = 'Basic ' + $window.sessionStorage.token;
-            }
-            return config;
-        },
-
-        responseError: function (rejection) {
-            if (rejection.status === 401) {
-                // handle case where the user is not authenticated
-                $location.path('/login');
-            }
-            return $q.reject(rejection);
-        }
-    };
-});
-
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 
