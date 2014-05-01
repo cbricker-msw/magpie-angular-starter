@@ -28,14 +28,20 @@ module.exports = function (grunt) {
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             js: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+                files: [
+                    '<%= yeoman.app %>{,*/}*.js',
+                    '!<%= yeoman.app %>/bower_components/{,*/}*.js'
+                ],
                 tasks: ['newer:jshint:all'],
                 options: {
                     livereload: true
                 }
             },
             jsTest: {
-                files: ['test/spec/{,*/}*.js'],
+                files: [
+                    '<%= yeoman.app %>{,*/}*.spec.js',
+                    '!<%= yeoman.app %>/bower_components/{,*/}*.spec.js'
+                ],
                 tasks: ['newer:jshint:test', 'karma']
             },
             styles: {
@@ -52,7 +58,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
                     '.tmp/styles/{,*/}*.css',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
         },
@@ -99,13 +105,19 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js'
+                '<%= yeoman.app %>/*.js',
+                '<%= yeoman.app %>/**/*.js',
+                '!<%= yeoman.app %>/bower_components/**/*.js',
+                '!<%= yeoman.app %>/**/*.spec.js'
             ],
             test: {
                 options: {
                     jshintrc: 'test/.jshintrc'
                 },
-                src: ['test/spec/{,*/}*.js']
+                src: [
+                    '<%= yeoman.app %>/**/*.spec.js',
+                    '!<%= yeoman.app %>/bower_components/**/*.spec.js'
+                ]
             }
         },
 
