@@ -93,7 +93,13 @@
     <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
+
+    <!-- These don't play properly with bower and they will get removed if they are in the bower:js section -->
+    <!-- Also, they need to be in the build:js section so they are included when the files are minified -->
+    <script src="bower_components/crypto-js/components/core-min.js"></script>
+    <script src="bower_components/crypto-js/components/enc-base64.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -105,8 +111,11 @@
     <script src="common/security/security.js"></script>
     <script src="common/security/securityService.js"></script>
     <script src="common/security/cryptographyService.js"></script>
+    <script src="common/security/authInterceptor.js"></script>
     <script src="common/models/models.js"></script>
     <script src="common/models/user.js"></script>
+    <script src="common/resources/resources.js"></script>
+    <script src="common/resources/loginResource.js"></script>
     <!-- endbuild -->
 </body>
 </html>

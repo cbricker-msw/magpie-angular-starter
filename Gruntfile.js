@@ -159,8 +159,8 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                        '<%= yeoman.dist %>/styles/fonts/*'
+                        '<%= yeoman.dist %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                        '<%= yeoman.dist %>/assets/fonts/*'
                     ]
                 }
             }
@@ -191,9 +191,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= yeoman.app %>/images',
+                        cwd: '<%= yeoman.app %>/assets/images',
                         src: '{,*/}*.{png,jpg,jpeg,gif}',
-                        dest: '<%= yeoman.dist %>/images'
+                        dest: '<%= yeoman.dist %>/assets/images'
                     }
                 ]
             }
@@ -203,9 +203,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= yeoman.app %>/images',
+                        cwd: '<%= yeoman.app %>/assets/images',
                         src: '{,*/}*.svg',
-                        dest: '<%= yeoman.dist %>/images'
+                        dest: '<%= yeoman.dist %>/assets/images'
                     }
                 ]
             }
@@ -222,7 +222,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '<%= yeoman.dist %>',
-                        src: ['*.html', 'views/{,*/}*.html'],
+                        src: ['*.html', '**/*.html', '!bower_components/**/*.html'],
                         dest: '<%= yeoman.dist %>'
                     }
                 ]
@@ -264,16 +264,18 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             '*.html',
-                            'views/{,*/}*.html',
+                            '**/*.html',
+                            '!bower_components/**/*.html',
                             'bower_components/**/*',
-                            'images/{,*/}*.{webp}',
-                            'fonts/*'
+                            'assets/images/{,*/}*.{webp}',
+                            'assets/fonts/*',
+                            'assets/i18n/*'
                         ]
                     },
                     {
                         expand: true,
                         cwd: '.tmp/images',
-                        dest: '<%= yeoman.dist %>/images',
+                        dest: '<%= yeoman.dist %>/assets/images',
                         src: ['generated/*']
                     }
                 ]

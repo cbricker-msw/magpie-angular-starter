@@ -25,6 +25,8 @@ module.exports = function (config) {
             // security.js is specifically called out because it contains the module definition but is not the
             // first file alphabetically in this directory.
             'app/common/security/security.js',
+            'app/common/resources/resources.js',
+
             'app/common/**/*.js',
             'app/home/**/*.js',
             'app/login/**/*.js'

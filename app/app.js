@@ -9,6 +9,7 @@ var app = angular.module('magpieStarterApp', [
     'msa.login',
     'msa.common.security',
     'msa.common.models',
+    'msa.common.resources',
     'pascalprecht.translate'
 ]);
 

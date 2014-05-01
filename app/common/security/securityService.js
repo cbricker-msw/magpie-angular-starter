@@ -2,7 +2,7 @@
 
 angular.module('msa.common.security')
 
-.factory('securityService', [ '$q', '$rootScope', '$window', '$http', 'cryptographyService', 'User', function ($q, $rootScope, $window, $http, cryptographyService, User) {
+.factory('securityService', [ '$q', '$rootScope', '$window', 'Login', 'cryptographyService', 'User', function ($q, $rootScope, $window, Login, cryptographyService, User) {
     var service = {
         currentUser: null,
 
@@ -10,9 +10,9 @@ angular.module('msa.common.security')
             var deferred = $q.defer();
             $window.sessionStorage.token = cryptographyService.base64Encode(credentials.username + ':' + credentials.password);
 
-            $http.get('http://localhost:3001/login').then(
+            Login.get(
                 function (result) {
-                    service.currentUser = User.build(result.data);
+                    service.currentUser = User.build(result);
                     deferred.resolve(service.currentUser);
                 },
                 function (errors) {
