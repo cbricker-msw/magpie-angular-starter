@@ -14,7 +14,9 @@ $ cd magpie-angular-starter
 $ npm -g install grunt-cli karma bower
 $ npm install
 $ bower install
+$ cd server
 $ npm install express
+$ cd ..
 ```
 Run the server:
 ```sh
