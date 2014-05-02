@@ -5,7 +5,7 @@ angular.module('msa.login', [ 'ngRoute', 'msa.common.security' ])
 .config([ '$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/login', {
-            templateUrl: 'login.html',
+            templateUrl: 'app/login/login.html',
             controller: 'LoginController',
             controllerAs: 'login'
         }
