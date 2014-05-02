@@ -11,25 +11,25 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'app/bower_components/angular/angular.js',
-            'app/bower_components/angular-mocks/angular-mocks.js',
-            'app/bower_components/angular-resource/angular-resource.js',
-            'app/bower_components/angular-cookies/angular-cookies.js',
-            'app/bower_components/angular-sanitize/angular-sanitize.js',
-            'app/bower_components/angular-route/angular-route.js',
-            'app/bower_components/crypto-js/components/core-min.js',
-            'app/bower_components/crypto-js/components/enc-base64.js',
-            'app/bower_components/angular-translate/angular-translate.js',
-            'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-            'app/*.js',
+            'src/bower_components/angular/angular.js',
+            'src/bower_components/angular-mocks/angular-mocks.js',
+            'src/bower_components/angular-resource/angular-resource.js',
+            'src/bower_components/angular-cookies/angular-cookies.js',
+            'src/bower_components/angular-sanitize/angular-sanitize.js',
+            'src/bower_components/angular-route/angular-route.js',
+            'src/bower_components/crypto-js/components/core-min.js',
+            'src/bower_components/crypto-js/components/enc-base64.js',
+            'src/bower_components/angular-translate/angular-translate.js',
+            'src/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+            'src/app/*.js',
             // security.js is specifically called out because it contains the module definition but is not the
             // first file alphabetically in this directory.
-            'app/common/security/security.js',
-            'app/common/resources/resources.js',
+            'src/common/security/security.js',
+            'src/common/resources/resources.js',
 
-            'app/common/**/*.js',
-            'app/home/**/*.js',
-            'app/login/**/*.js'
+            'src/common/**/*.js',
+            'src/app/home/**/*.js',
+            'src/app/login/**/*.js'
         ],
 
         // list of files / patterns to exclude
