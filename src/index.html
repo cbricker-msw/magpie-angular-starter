@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <!-- endbuild -->
     <!-- build:css({.tmp,src}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -47,8 +48,8 @@
             <div class="navbar-header pull-right" ng-show="header.isAuthenticated()" ng-controller="LoginController as login">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{ active: header.isActive('/') }"><a href="#!/">{{ 'HOME_NAVIGATION' | translate }}</a></li>
-                        <li><a href="#" ng-click="login.logout()">{{ 'SIGN_OUT' | translate }}</a></li>
+                        <li ng-class="{ active: header.isActive('/') }"><a href="#!/"><i class="fa fa-home fa-lg"></i> {{ 'HOME_NAVIGATION' | translate }}</a></li>
+                        <li><a href="#" ng-click="login.logout()"><i class="fa fa-sign-out fa-lg"></i>{{ 'SIGN_OUT' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
