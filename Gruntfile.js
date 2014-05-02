@@ -134,7 +134,14 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            server: '.tmp'
+            server: '.tmp',
+            css: {
+                files: [
+                    {
+                        src: [ '<%= yeoman.src %>/styles/*' ]
+                    }
+                ]
+            }
         },
 
         // Add vendor prefixed styles
@@ -162,6 +169,13 @@ module.exports = function (grunt) {
             }
         },
 
+        less: {
+            development: {
+                files: {
+                    '<%= yeoman.src %>/styles/main.css': '<%= yeoman.src %>/less/main.less'
+                }
+            }
+        },
 
         // Renames files for browser caching purposes
         rev: {
@@ -385,6 +399,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'clean:css',
+        'less',
         'bower-install',
         'useminPrepare',
         'concurrent:dist',
