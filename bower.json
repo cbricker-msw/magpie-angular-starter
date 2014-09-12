@@ -10,7 +10,6 @@
     "angular-resource": "~1.2.14",
     "angular-cookies": "~1.2.14",
     "angular-sanitize": "~1.2.14",
-    "angular-route": "~1.2.14",
     "crypto-js": "http://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
     "angular-translate": "~2.1.0",
     "angular-ui-router": "~0.2.11",

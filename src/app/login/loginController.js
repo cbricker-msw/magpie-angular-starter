@@ -3,10 +3,10 @@
 angular.module('msa.login')
 
 .controller('LoginController', [
-    '$location',
+    '$state',
     '$translate',
     'securityService',
-    function ($location, $translate, securityService) {
+    function ($state, $translate, securityService) {
         this.credentials = {
             username: '',
             password: ''
@@ -18,7 +18,7 @@ angular.module('msa.login')
             var login = this;
             securityService.login(credentials).then(
                 function () {
-                    $location.path('/');
+                    $state.go('home');
                 },
                 function (errors) {
                     $translate('LOGIN_ERROR', { status: errors.status, data: errors.data }).then(function (message) {
@@ -30,7 +30,7 @@ angular.module('msa.login')
 
         this.logout = function () {
             securityService.logout();
-            $location.url('/');
+            $state.reload();
         };
 
     }

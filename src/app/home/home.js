@@ -1,13 +1,17 @@
 'use strict';
 
-angular.module('msa.home', [ 'ngRoute', 'msa.common.security' ])
+angular.module('msa.home', [ 'msa.common.security' ])
 
-.config(function ($routeProvider) {
-    $routeProvider
-        .when('/', {
-            templateUrl: 'app/home/home.html',
-            controller: 'HomeController',
-            controllerAs: 'home'
-        }
-    );
-});
+.config([
+    '$stateProvider',
+    function ($stateProvider) {
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'app/home/home.html',
+                controller: 'HomeController',
+                controllerAs: 'home'
+            }
+        );
+    }
+]);

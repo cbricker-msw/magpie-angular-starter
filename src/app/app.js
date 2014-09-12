@@ -4,7 +4,7 @@ angular.module('magpieStarterApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute',
+    'ui.router',
     'msa.home',
     'msa.login',
     'msa.common.security',
@@ -14,13 +14,12 @@ angular.module('magpieStarterApp', [
 ])
 
 .config([
-    '$routeProvider',
+    '$stateProvider',
+    '$urlRouterProvider',
     '$translateProvider',
-    function ($routeProvider, $translateProvider) {
-        $routeProvider
-            .otherwise({
-                redirectTo: '/'
-            });
+    function ($stateProvider, $urlRouterProvider, $translateProvider) {
+        $urlRouterProvider
+            .otherwise('/');
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'assets/i18n/locale-',
