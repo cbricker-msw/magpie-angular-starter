@@ -1,13 +1,19 @@
 'use strict';
 
-angular.module('msa.login', [ 'ngRoute', 'msa.common.security' ])
+angular.module('msa.login', [
+    'ngRoute',
+    'msa.common.security'
+])
 
-.config([ '$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/login', {
-            templateUrl: 'app/login/login.html',
-            controller: 'LoginController',
-            controllerAs: 'login'
-        }
-    );
-}]);
+.config([
+    '$routeProvider',
+    function ($routeProvider) {
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'app/login/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login'
+            }
+        );
+    }
+]);

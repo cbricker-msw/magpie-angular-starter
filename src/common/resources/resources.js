@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module('msa.common.resources', [ 'ngResource' ]);
+angular.module('msa.common.resources', [
+    'ngResource'
+]);
