@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('msa.login', [
-    'msa.common.security'
+    'msa.common.security',
+    'ui.router'
 ])
 
 .config([

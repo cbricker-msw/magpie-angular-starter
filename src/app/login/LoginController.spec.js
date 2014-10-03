@@ -1,20 +1,19 @@
 'use strict';
 
 describe('Given LoginController', function () {
-    var scope, rootScope, controller, q, location, translate, mockSecurityService;
+    var scope, rootScope, controller, q, state, translate, mockSecurityService;
 
     beforeEach(function () {
         module('msa.login');
-        module('ngRoute');
         module('pascalprecht.translate');
 
         mockSecurityService = jasmine.createSpyObj('securityService', [ 'login', 'logout' ]);
 
-        inject(function ($rootScope, $controller, $q, $location, $translate) {
+        inject(function ($rootScope, $controller, $q, $state, $translate) {
             scope = $rootScope.$new();
             q = $q;
             rootScope = $rootScope;
-            location = $location;
+            state = $state;
             translate = $translate;
 
             controller = $controller('LoginController', {
@@ -29,16 +28,15 @@ describe('Given LoginController', function () {
         var password = 'test-password';
         var credentials = { username: username, password: password };
 
-        location.path('/');
-
         var deferred = q.defer();
         mockSecurityService.login.andReturn(deferred.promise);
+        spyOn(state, 'go');
 
         controller.login(credentials);
         deferred.resolve();
         rootScope.$apply();
 
-        expect(location.path()).toEqual('/');
+        expect(state.go).toHaveBeenCalledWith('home');
         expect(mockSecurityService.login).toHaveBeenCalledWith(credentials);
         expect(controller.error).toBe('');
     });
@@ -48,8 +46,6 @@ describe('Given LoginController', function () {
         var password = 'test-password';
         var credentials = { username: username, password: password };
 
-        location.path('/');
-
         var deferred = q.defer();
         mockSecurityService.login.andReturn(deferred.promise);
 
@@ -57,15 +53,17 @@ describe('Given LoginController', function () {
         deferred.reject({ status: 404 });
         rootScope.$apply();
 
-        expect(location.path()).toEqual('/');
         expect(mockSecurityService.login).toHaveBeenCalledWith(credentials);
         expect(scope.error).not.toBe('');
     });
 
     it('logout succeeds', function () {
-        controller.logout();
+        spyOn(state, 'reload');
 
-        expect(location.path()).toEqual('/');
+        controller.logout();
+        rootScope.$apply();
+
+        expect(state.reload).toHaveBeenCalled();
         expect(mockSecurityService.logout).toHaveBeenCalled();
     });
 

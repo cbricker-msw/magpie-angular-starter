@@ -16,7 +16,7 @@ module.exports = function (config) {
             'src/bower_components/angular-resource/angular-resource.js',
             'src/bower_components/angular-cookies/angular-cookies.js',
             'src/bower_components/angular-sanitize/angular-sanitize.js',
-            'src/bower_components/angular-route/angular-route.js',
+            'src/bower_components/angular-ui-router/release/angular-ui-router.js',
             'src/bower_components/crypto-js/components/core-min.js',
             'src/bower_components/crypto-js/components/enc-base64.js',
             'src/bower_components/angular-translate/angular-translate.js',
